@@ -36,8 +36,6 @@ struct MainView: View {
                     
                 }
             
-            
-            
         }
     }
 }
@@ -51,6 +49,7 @@ struct MainView_Previews: PreviewProvider {
 extension MainView {
     func fetch(of name: String) {
         
+        // MARK: - Alamofire
         let url = "https://api.github.com/users/\(name)"
         AF.request(url,
                    method: .get,
