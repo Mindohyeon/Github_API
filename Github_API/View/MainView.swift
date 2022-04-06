@@ -16,6 +16,7 @@ struct MainView: View {
     
     var imageUrl: String = ""
     @State var inputId: String = ""
+    @State var email : String = ""
     
     
     var body: some View {
@@ -52,6 +53,9 @@ struct MainView: View {
                     .scaledToFit()
                     .frame(maxWidth: 100)
             }
+            
+            Text(email)
+                .font(.title2)
         }
     }
     
@@ -65,7 +69,7 @@ struct MainView: View {
                    parameters: nil,
                    encoding: URLEncoding.default,
                    headers: ["Content-Type":"application/json", "Accept":"application/json"])
-        .validate(statusCode: 200..<300)
+//        .validate(statusCode: 200..<300)
         .responseJSON { (response) in
             print(response)
 
@@ -74,10 +78,8 @@ struct MainView: View {
             case .success(_):
                 do {
 
-                    let json = try
-                    JSONDecoder().decode(API.self, from: response.data ?? .init())
+                    let json = try JSONDecoder().decode(API.self, from: response.data ?? .init())
 
-                    
                     self.api = json.contact
                 } catch(let error) {
                     print("error = \(error)")
