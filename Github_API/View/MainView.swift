@@ -54,6 +54,24 @@ struct MainView: View {
             
             Text(email)
                 .font(.title2)
+            
+            
+            HStack(spacing: 50) {
+                VStack {
+                    Text("following")
+                    
+                    Text(String(api.first?.following ?? 0))
+                }
+                
+                VStack {
+                    Text("followers")
+                    
+                    Text(String(api.first?.followers ?? 0))
+                }
+                
+                
+            }
+            
         }
     }
     
@@ -67,19 +85,19 @@ struct MainView: View {
                    parameters: nil,
                    encoding: URLEncoding.default,
                    headers: ["Content-Type":"application/json", "Accept":"application/json"])
-//        .validate(statusCode: 200..<300)
+        //        .validate(statusCode: 200..<300)
         .responseJSON { (response) in
             print(response)
-
+            
             switch response.result {
-
+                
             case .success(_):
                 do {
                     
                     let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
                     print("contack = \(json)")
                     
-
+                    
                     self.api = [json]
                 } catch(let error) {
                     print("error = \(error)")
