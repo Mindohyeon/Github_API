@@ -13,8 +13,6 @@ import Combine
 struct MainView: View {
     
     @State var api: [Contact] = []
-    
-    var imageUrl: String = ""
     @State var inputId: String = ""
     @State var email : String = ""
     
