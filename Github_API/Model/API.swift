@@ -14,6 +14,9 @@ struct API : Codable{
 struct Contact : Codable {
     var name : String
     var avatar_url : String
+    var email : String?
+    var followers : Int
+    var following : Int
 }
 
     
