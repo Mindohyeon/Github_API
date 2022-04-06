@@ -42,7 +42,7 @@ struct MainView: View {
             
             
             
-            AsyncImage(url: URL(string: "https://avatars.githubusercontent.com/u/81687906?v=4")) { image in
+            AsyncImage(url: URL(string: api.first?.avatar_url ?? "photo")) { image in
                 image
                     .resizable()
                     .scaledToFit()
@@ -80,6 +80,7 @@ struct MainView: View {
                     
                     let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
                     print("contack = \(json)")
+                    
 
                     self.api = [json]
                 } catch(let error) {
