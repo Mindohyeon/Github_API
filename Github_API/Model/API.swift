@@ -13,7 +13,7 @@ struct API : Codable{
 
 struct Contact : Codable {
     var name : String
-    var userImg : String
+    var avatar_url : String
 }
 
     
