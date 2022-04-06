@@ -77,10 +77,11 @@ struct MainView: View {
 
             case .success(_):
                 do {
+                    
+                    let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
+                    print("contack = \(json)")
 
-                    let json = try JSONDecoder().decode(API.self, from: response.data ?? .init())
-
-                    self.api = json.contact
+                    self.api = [json]
                 } catch(let error) {
                     print("error = \(error)")
                 }
