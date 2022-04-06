@@ -18,6 +18,7 @@ struct Contact : Codable {
     var followers : Int
     var following : Int
     var url : String
+    
 }
 
     

@@ -18,60 +18,63 @@ struct MainView: View {
     
     
     var body: some View {
-        VStack {
-            HStack {
+        ZStack {
+            Color.orange
+                .scaledToFit()
+            
+            VStack {
+                HStack {
+                    
+                    TextField("id", text: $inputId)
+                        .frame(maxWidth: 200, maxHeight: 30)
+                    
+                    //enter 쳤을 때
+                        .onSubmit {
+                            print(inputId)
+                        }
+                    
+                    Image(systemName: "paperplane")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            fetch(of: inputId)
+                            print(inputId)
+                            
+                        }
+                }
                 
-                TextField("id", text: $inputId)
-                    .frame(maxWidth: 200, maxHeight: 30)
+                AsyncImage(url: URL(string: api.first?.avatar_url ?? "photo")) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 300)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 100)
+                }
                 
-                //enter 쳤을 때
-                    .onSubmit {
-                        print(inputId)
+                Text(email)
+                    .font(.title2)
+                
+                
+                HStack(spacing: 50) {
+                    VStack {
+                        Text("following")
                         
+                        Text(String(api.first?.following ?? 0))
                     }
-                
-                Image(systemName: "paperplane")
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        fetch(of: inputId)
-                        print(inputId)
+                    
+                    VStack {
+                        Text("followers")
+                        
+                        Text(String(api.first?.followers ?? 0))
                     }
-            }
-            
-            
-            
-            AsyncImage(url: URL(string: api.first?.avatar_url ?? "photo")) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 100)
-            } placeholder: {
-                Image(systemName: "photo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 100)
-            }
-            
-            Text(email)
-                .font(.title2)
-            
-            
-            HStack(spacing: 50) {
-                VStack {
-                    Text("following")
                     
-                    Text(String(api.first?.following ?? 0))
-                }
-                
-                VStack {
-                    Text("followers")
                     
-                    Text(String(api.first?.followers ?? 0))
                 }
-                
-                
             }
-            
         }
     }
     
@@ -95,7 +98,7 @@ struct MainView: View {
                 do {
                     
                     let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
-                    print("contack = \(json)")
+                    print("contact = \(json)")
                     
                     
                     self.api = [json]
