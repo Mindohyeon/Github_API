@@ -11,7 +11,8 @@ import Alamofire
 
 class MainViewModel : ObservableObject {
     
-    @Published var api : [Contact] = []
+    @Published var api : Contact? = nil
+    @Published var inputId : String = ""
     
     
     func fetch(of name: String) async {
@@ -36,7 +37,7 @@ class MainViewModel : ObservableObject {
                     let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
                     print("contact = \(json)")
                     
-                    self.api = [json]
+                    self.api = json
                 } catch(let error) {
                     print("error = \(error)")
                 }
