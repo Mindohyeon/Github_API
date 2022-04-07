@@ -40,18 +40,24 @@ struct MainView: View {
                         }
                 }
                 
-                AsyncImage(url: URL(string: viewModel.api?.avatar_url ?? "")) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 200)
-                        .clipShape(Circle())
-                } placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 100)
+                if let url = viewModel.api?.avatarUrl {
+                    AsyncImage(url: URL(string: url)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 200)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 100)
+                    }
+                    
+                } else {
+                    Text("")
                 }
+                
                 
                 Text(email)
                     .font(.title2)
@@ -61,7 +67,7 @@ struct MainView: View {
                     VStack {
                         Text("following")
                         
-
+                        
                         Text(String(viewModel.api?.following ?? 0))
                     }
                     

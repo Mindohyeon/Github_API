@@ -13,10 +13,15 @@ struct API : Codable{
 
 struct Contact : Codable {
     var name : String
-    var avatar_url : String
+    var avatarUrl : String
     var followers : Int
     var following : Int
     var url : String
+    
+    enum CodingKeys : String, CodingKey {
+        case avatarUrl = "avatar_url"
+        case name, following, followers, url
+    }
     
 }
 
