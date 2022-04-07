@@ -40,11 +40,11 @@ struct MainView: View {
                         }
                 }
                 
-                AsyncImage(url: URL(string: viewModel.api?.avatar_url ?? "photo")) { image in
+                AsyncImage(url: URL(string: viewModel.api?.avatar_url ?? "")) { image in
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 300)
+                        .frame(maxWidth: 200)
                         .clipShape(Circle())
                 } placeholder: {
                     Image(systemName: "photo")
