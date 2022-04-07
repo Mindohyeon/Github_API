@@ -12,11 +12,12 @@ struct Contact : Codable {
     var avatarUrl : String
     var followers : Int
     var following : Int
-    var url : String
+    var htmlUrl : String
     
     enum CodingKeys : String, CodingKey {
         case avatarUrl = "avatar_url"
-        case name, following, followers, url
+        case htmlUrl = "html_url"
+        case name, following, followers
     }
     
 }
