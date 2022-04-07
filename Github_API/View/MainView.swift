@@ -6,13 +6,9 @@
 //
 
 import SwiftUI
-import Alamofire
-import Combine
-
 
 struct MainView: View {
-    
-    @State var api: [Contact] = []
+    @StateObject var viewModel = MainViewModel()
     @State var inputId: String = ""
     @State var email : String = ""
     
@@ -36,13 +32,13 @@ struct MainView: View {
                     Image(systemName: "paperplane")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            fetch(of: inputId)
+                            viewModel.fetch(of: inputId)
                             print(inputId)
                             
                         }
                 }
                 
-                AsyncImage(url: URL(string: api.first?.avatar_url ?? "photo")) { image in
+                AsyncImage(url: URL(string: viewModel.api.first?.avatar_url ?? "photo")) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -63,13 +59,13 @@ struct MainView: View {
                     VStack {
                         Text("following")
                         
-                        Text(String(api.first?.following ?? 0))
+                        Text(String(viewModel.api.first?.following ?? 0))
                     }
                     
                     VStack {
                         Text("followers")
                         
-                        Text(String(api.first?.followers ?? 0))
+                        Text(String(viewModel.api.first?.followers ?? 0))
                     }
                     
                     
@@ -78,38 +74,6 @@ struct MainView: View {
         }
     }
     
-    func fetch(of name: String) {
-        
-        // MARK: - Alamofire
-        print("iii")
-        let url = "https://api.github.com/users/\(name)"
-        AF.request(url,
-                   method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
-        //        .validate(statusCode: 200..<300)
-        .responseJSON { (response) in
-            print(response)
-            
-            switch response.result {
-                
-            case .success(_):
-                do {
-                    
-                    let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
-                    print("contact = \(json)")
-                    
-                    
-                    self.api = [json]
-                } catch(let error) {
-                    print("error = \(error)")
-                }
-            case .failure(let error):
-                print("error = \(error.localizedDescription)")
-            }
-        }
-    }
     
 }
 
