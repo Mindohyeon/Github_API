@@ -70,7 +70,17 @@ struct MainView: View {
                         Text(String(viewModel.api?.followers ?? 0))
                     }
                     
-                    
+                }
+                .padding()
+                
+                if let url = viewModel.api?.htmlUrl {
+                    Link(destination: URL(string: url)!) {
+                        Text("깃허브로 이동하기!")
+                            .font(.system(size: 15))
+                    }
+                } else {
+                    Text("사용자의 깃허브 링크가 없어요.")
+                        .font(.system(size: 15))
                 }
             }
         }
