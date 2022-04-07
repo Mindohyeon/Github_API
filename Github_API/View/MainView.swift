@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     @State var inputId: String = ""
+    @State var email : String = ""
     
     
     var body: some View {
@@ -31,7 +32,6 @@ struct MainView: View {
                     Image(systemName: "paperplane")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            
                             Task {
                                 
                                 await viewModel.fetch(of: inputId)
@@ -40,7 +40,7 @@ struct MainView: View {
                         }
                 }
                 
-                AsyncImage(url: URL(string: viewModel.api?.avatar_url ?? "photo")) { image in
+                AsyncImage(url: URL(string: viewModel.api.first?.avatar_url ?? "photo")) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -53,10 +53,15 @@ struct MainView: View {
                         .frame(maxWidth: 100)
                 }
                 
+                Text(email)
+                    .font(.title2)
+                
+                
                 HStack(spacing: 50) {
                     VStack {
                         Text("following")
                         
+
                         Text(String(viewModel.api?.following ?? 0))
                     }
                     
