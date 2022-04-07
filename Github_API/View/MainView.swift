@@ -10,7 +10,6 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     
-    
     var body: some View {
         ZStack {
             Color.orange
@@ -19,12 +18,12 @@ struct MainView: View {
             VStack {
                 HStack {
                     
-                    TextField("id", text: $inputId)
+                    TextField("id", text: $viewModel.inputId)
                         .frame(maxWidth: 200, maxHeight: 30)
                     
                     //enter 쳤을 때
                         .onSubmit {
-                            print(inputId)
+                            print(viewModel.inputId)
                         }
                     
                     Image(systemName: "paperplane")
@@ -32,8 +31,9 @@ struct MainView: View {
                         .onTapGesture {
                             Task {
                                 
-                                await viewModel.fetch(of: inputId)
-                                print(inputId)
+                                await viewModel.fetch()
+                                print(viewModel.inputId)
+                                
                             }
                         }
                 }
@@ -53,13 +53,8 @@ struct MainView: View {
                     }
                     
                 } else {
-                    Text("")
+                    Text("없음")
                 }
-                
-                
-                Text(email)
-                    .font(.title2)
-                
                 
                 HStack(spacing: 50) {
                     VStack {

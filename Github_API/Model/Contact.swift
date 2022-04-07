@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-struct API : Codable{
-    var contact : [Contact]
-}
-
 struct Contact : Codable {
     var name : String
     var avatarUrl : String
