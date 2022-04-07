@@ -6,63 +6,84 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct MainView: View {
-    
-    var api: [API] = []
-    
-    var imageUrl: String = ""
+    @StateObject var viewModel = MainViewModel()
     @State var inputId: String = ""
-
+    @State var email : String = ""
+    
     
     var body: some View {
-        VStack {
-            Button {
-                fetch(of: inputId)
-                print(inputId)
-            } label: {
-                Image(imageUrl)
-                    .resizable()
-                    .frame(width: 100, height: 100)
+        ZStack {
+            Color.orange
+                .scaledToFit()
+            
+            VStack {
+                HStack {
+                    
+                    TextField("id", text: $inputId)
+                        .frame(maxWidth: 200, maxHeight: 30)
+                    
+                    //enter 쳤을 때
+                        .onSubmit {
+                            print(inputId)
+                        }
+                    
+                    Image(systemName: "paperplane")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                                
+                            Task {
+                                
+                                await viewModel.fetch(of: inputId)
+                                print(inputId)
+                            }
+
+                            
+                        }
+                }
                 
-            }
-            
-            TextField("id", text: $inputId)
-                .frame(maxWidth: 200, maxHeight: 30)
-            
-                .onSubmit {
-                    print(inputId)
+                AsyncImage(url: URL(string: viewModel.api.first?.avatar_url ?? "photo")) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 300)
+                        .clipShape(Circle())
+                } placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 100)
+                }
+                
+                Text(email)
+                    .font(.title2)
+                
+                
+                HStack(spacing: 50) {
+                    VStack {
+                        Text("following")
+                        
+                        Text(String(viewModel.api.first?.following ?? 0))
+                    }
+                    
+                    VStack {
+                        Text("followers")
+                        
+                        Text(String(viewModel.api.first?.followers ?? 0))
+                    }
+                    
                     
                 }
-            
-            
-            
+            }
         }
     }
+    
+    
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-    }
-}
-
-extension MainView {
-    func fetch(of name: String) {
-        
-        let url = "https://api.github.com/users/\(name)"
-        AF.request(url,
-                   method: .get,
-                   parameters: nil,
-                   encoding: URLEncoding.default,
-                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
-            .validate(statusCode: 200..<300)
-            .responseJSON { (json) in
-                print(json)
-                
-            }
-
-    
     }
 }
