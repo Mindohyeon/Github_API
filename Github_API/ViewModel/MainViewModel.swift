@@ -14,7 +14,7 @@ class MainViewModel : ObservableObject {
     @Published var api : [Contact] = []
     
     
-    func fetch(of name: String) {
+    func fetch(of name: String) async {
         
         // MARK: - Alamofire
         print("iii")
@@ -35,7 +35,6 @@ class MainViewModel : ObservableObject {
                     
                     let json = try JSONDecoder().decode(Contact.self, from: response.data ?? .init())
                     print("contact = \(json)")
-                    
                     
                     self.api = [json]
                 } catch(let error) {

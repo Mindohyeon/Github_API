@@ -32,8 +32,13 @@ struct MainView: View {
                     Image(systemName: "paperplane")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            viewModel.fetch(of: inputId)
-                            print(inputId)
+                                
+                            Task {
+                                
+                                await viewModel.fetch(of: inputId)
+                                print(inputId)
+                            }
+
                             
                         }
                 }
