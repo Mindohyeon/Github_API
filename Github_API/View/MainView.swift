@@ -9,9 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
-    @State var inputId: String = ""
-    @State var email : String = ""
-    
     
     var body: some View {
         ZStack {
@@ -21,56 +18,56 @@ struct MainView: View {
             VStack {
                 HStack {
                     
-                    TextField("id", text: $inputId)
+                    TextField("id", text: $viewModel.inputId)
                         .frame(maxWidth: 200, maxHeight: 30)
                     
                     //enter 쳤을 때
                         .onSubmit {
-                            print(inputId)
+                            print(viewModel.inputId)
                         }
                     
                     Image(systemName: "paperplane")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                                
                             Task {
                                 
-                                await viewModel.fetch(of: inputId)
-                                print(inputId)
+                                await viewModel.fetch()
+                                print(viewModel.inputId)
+                                
                             }
-
-                            
                         }
                 }
                 
-                AsyncImage(url: URL(string: viewModel.api.first?.avatar_url ?? "photo")) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 300)
-                        .clipShape(Circle())
-                } placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 100)
+                if let url = viewModel.api?.avatarUrl {
+                    AsyncImage(url: URL(string: url)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 200)
+                            .clipShape(Circle())
+                    } placeholder: {
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 100)
+                    }
+                    
+                } else {
+                    Text("없음")
                 }
-                
-                Text(email)
-                    .font(.title2)
-                
                 
                 HStack(spacing: 50) {
                     VStack {
                         Text("following")
                         
-                        Text(String(viewModel.api.first?.following ?? 0))
+                        
+                        Text(String(viewModel.api?.following ?? 0))
                     }
                     
                     VStack {
                         Text("followers")
                         
-                        Text(String(viewModel.api.first?.followers ?? 0))
+                        Text(String(viewModel.api?.followers ?? 0))
                     }
                     
                     

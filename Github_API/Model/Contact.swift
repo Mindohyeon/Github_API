@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct API : Codable{
-    var contact : [Contact]
-}
-
 struct Contact : Codable {
     var name : String
-    var avatar_url : String
-    var email : String?
+    var avatarUrl : String
     var followers : Int
     var following : Int
     var url : String
+    
+    enum CodingKeys : String, CodingKey {
+        case avatarUrl = "avatar_url"
+        case name, following, followers, url
+    }
     
 }
 

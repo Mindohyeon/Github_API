@@ -13,7 +13,7 @@
 		DFAA83A327E3FB4C00A9AA13 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFAA83A227E3FB4C00A9AA13 /* Preview Assets.xcassets */; };
 		DFAA83AE27E4064C00A9AA13 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAA83AD27E4064C00A9AA13 /* MainView.swift */; };
 		DFAA83B127E4074800A9AA13 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAA83B027E4074800A9AA13 /* MainViewModel.swift */; };
-		DFAA83B427E42C9A00A9AA13 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAA83B327E42C9A00A9AA13 /* API.swift */; };
+		DFAA83B427E42C9A00A9AA13 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAA83B327E42C9A00A9AA13 /* Contact.swift */; };
 		DFAA83B727E43F2700A9AA13 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DFAA83B627E43F2700A9AA13 /* Alamofire */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,7 @@
 		DFAA83A227E3FB4C00A9AA13 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DFAA83AD27E4064C00A9AA13 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DFAA83B027E4074800A9AA13 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		DFAA83B327E42C9A00A9AA13 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DFAA83B327E42C9A00A9AA13 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 		DFAA83B227E42C8200A9AA13 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DFAA83B327E42C9A00A9AA13 /* API.swift */,
+				DFAA83B327E42C9A00A9AA13 /* Contact.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,7 +182,7 @@
 				DFAA83AE27E4064C00A9AA13 /* MainView.swift in Sources */,
 				DFAA839C27E3FB4B00A9AA13 /* Github_APIApp.swift in Sources */,
 				DFAA83B127E4074800A9AA13 /* MainViewModel.swift in Sources */,
-				DFAA83B427E42C9A00A9AA13 /* API.swift in Sources */,
+				DFAA83B427E42C9A00A9AA13 /* Contact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
