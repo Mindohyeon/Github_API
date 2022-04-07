@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel = MainViewModel()
-    @State var inputId: String = ""
-    @State var email : String = ""
     
     
     var body: some View {

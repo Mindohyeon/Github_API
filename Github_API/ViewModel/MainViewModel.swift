@@ -15,8 +15,6 @@ class MainViewModel : ObservableObject {
     @Published var inputId : String = ""
     
     
-    
-    
     func fetch(of name: String) async {
         
         // MARK: - Alamofire
